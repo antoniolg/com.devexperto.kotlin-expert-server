@@ -7,10 +7,18 @@ plugins {
     kotlin("jvm") version "1.7.20"
     kotlin("plugin.serialization") version "1.7.20"
     id("io.ktor.plugin") version "2.1.2"
+    id("com.squareup.sqldelight") version "1.5.4"
 }
 
 group = "com.devexperto.kotlinexpert"
 version = "0.0.1"
+
+sqldelight {
+    database("AppDatabase") {
+        packageName = "com.devexperto.kotlinexpert.database"
+    }
+}
+
 application {
     mainClass.set("com.devexperto.kotlinexpert.ApplicationKt")
 
@@ -30,6 +38,8 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
 
     implementation("ch.qos.logback:logback-classic:$logback_version")
+
+    implementation("com.squareup.sqldelight:sqlite-driver:1.5.4")
 
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
